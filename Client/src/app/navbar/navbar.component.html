@@ -3,18 +3,29 @@
   
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Dating App</a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="accountservice.current$|async">
           <li class="nav-item">
-            <a class="nav-link"  href="#">Home</a>
+            <a class="nav-link"  href="#">Matches</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Lists</a>
           </li>          
           <li class="nav-item">
-            <a class="nav-link" href="#">Disabled</a>
+            <a class="nav-link" href="#">Messages</a>
           </li>
         </ul>
-        <form #ngLoginForm class="d-flex" autocomplete="off" (ngSubmit)="login()" >
+
+        <div class="dropdown" *ngIf="accountservice.current$|async">
+          <a  class="dropdown-toggle text-light" dropdownToggle>
+            Welcome
+          </a>
+          <div class="dropdown-menu" *dropdownMenu>
+            <a href="" class="dropdown-item">Edit</a>
+            <div class="dropdown-divider"></div>
+            <a href="" class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+        </div>
+        <form #ngLoginForm class="d-flex" autocomplete="off" (ngSubmit)="login()" *ngIf="(accountservice.current$ |async) ===null" >
           <input 
                 name = "userame"
                 [(ngModel)]="model.username"
