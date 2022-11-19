@@ -7,12 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  registerIn:boolean;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   register(){
-    
+    this.registerIn = true;
   }
 }
