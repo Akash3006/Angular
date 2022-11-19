@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccountService } from '../_services/account.service';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,7 +20,9 @@ export class RegisterComponent implements OnInit {
         console.log(response);
         this.cancel();
       },
-      error=> console.log(error)
+      error=> {
+        console.log(error);        
+      }
     );
   }
   cancel(){

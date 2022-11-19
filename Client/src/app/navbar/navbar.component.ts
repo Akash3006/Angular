@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   model:any = {};
 
-  constructor(public accountservice:AccountService) { }
+  constructor(public accountservice:AccountService,private router:Router) { }
 
   ngOnInit(): void {
    
@@ -19,12 +21,15 @@ export class NavbarComponent implements OnInit {
   login(){
     console.log(this.model);
     this.accountservice.login(this.model).subscribe(response=>{
-      console.log(response);
-    },error=>{console.log(error)});
+      this.router.navigateByUrl('/members');
+    },error=>{
+      console.log(error);      
+    });
     
   }
 
   logout(){
-    this.accountservice.logout();    
+    this.accountservice.logout();
+    this.router.navigateByUrl('/');    
   }
 }
