@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, ReplaySubject } from 'rxjs';
-import { BaseUrl,AccountAction, AccountController} from '../constants/Constants';
+import { BaseUrl, AccountController, LoginAction, RegisterAction} from '../constants/Constants';
 import { User } from '../_models/User';
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,25 @@ export class AccountService {
   current$ = this.currentUserSource.asObservable();
 
   login(model:any){
-    return this.httpService.post(BaseUrl+AccountController+AccountAction,model).pipe(
+    return this.httpService.post(BaseUrl+AccountController+LoginAction,model).pipe(
       map((response:User)=>{
         const user = response;
         if(user){
           localStorage.setItem('user',JSON.stringify(user));
           //setting up the buffer 
           this.currentUserSource.next(user);//setup the current response 
+        }
+      })
+    );
+  }
+
+  register(model:any){
+    return this.httpService.post(BaseUrl+AccountController+RegisterAction,model).pipe(
+      map((user:User)=>{
+        if(user)
+        {
+          localStorage.setItem('user',JSON.stringify(user));
+          this.currentUserSource.next(user);
         }
       })
     );

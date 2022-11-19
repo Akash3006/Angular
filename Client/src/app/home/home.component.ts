@@ -14,6 +14,10 @@ export class HomeComponent implements OnInit {
   }
 
   register(){
-    this.registerIn = true;
+    this.registerIn = !this.registerIn;
+  }
+
+  cancelRegitser(event:boolean){
+    this.registerIn = event;
   }
 }
