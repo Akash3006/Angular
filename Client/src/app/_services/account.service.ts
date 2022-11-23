@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, map, ReplaySubject } from 'rxjs';
 import { BaseUrl, AccountController, LoginAction, RegisterAction} from '../constants/Constants';
 import { User } from '../_models/User';
 @Injectable({
@@ -11,7 +11,7 @@ export class AccountService {
   constructor(private httpService:HttpClient) { }
 
   //Buffer
-  private currentUserSource = new ReplaySubject<User>(1);
+  private currentUserSource = new BehaviorSubject<User|null>(null);
   current$ = this.currentUserSource.asObservable();
 
   login(model:any){
