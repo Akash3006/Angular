@@ -12,21 +12,21 @@ export class MembersService {
 
   getMembers(){
 
-    return this.http.get<Member[]>(BaseUrl+UserController, this.getHttpOptions());
+    return this.http.get<Member[]>(BaseUrl+UserController);
   }
 
   getMember(username:string){
-    return this.http.get<Member>(BaseUrl+UserController+'/'+username,this.getHttpOptions());
+    return this.http.get<Member>(BaseUrl+UserController+'/'+username);
   }
 
-  getHttpOptions(){
-    var userString = localStorage.getItem('user');
-    if(!userString) return;
-    const user = JSON.parse(userString);
-    return {
-      headers: new HttpHeaders({
-        Authorization:'Bearer '+ user.token
-      })
-    }
-  }
+  // getHttpOptions(){
+  //   var userString = localStorage.getItem('user');
+  //   if(!userString) return;
+  //   const user = JSON.parse(userString);
+  //   return {
+  //     headers: new HttpHeaders({
+  //       Authorization:'Bearer '+ user.token
+  //     })
+  //   }
+  // } //This method was discarded, An interceptor was added to add token with request
 }
