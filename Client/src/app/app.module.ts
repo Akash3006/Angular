@@ -17,6 +17,9 @@ import { MemberDetailsComponent } from './members/member-details/member-details.
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     MessagesComponent,
     MembersListComponent,
     MemberDetailsComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -38,10 +42,13 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     BrowserAnimationsModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    NgxSpinnerModule.forRoot({
+      type:'line-scale-party'})
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
