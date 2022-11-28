@@ -21,6 +21,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
     BrowserAnimationsModule,
     NgxGalleryModule,
     NgxSpinnerModule.forRoot({
-      type:'line-scale-party'})
+      type:'line-scale-party'}),
+      FileUploadModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},
