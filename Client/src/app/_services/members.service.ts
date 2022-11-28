@@ -9,7 +9,7 @@ import { Member } from '../_models/member';
 })
 export class MembersService {
 
-  members:Member[];
+  members:Member[]=[];
   constructor(private http:HttpClient) { }
 
   getMembers(){
