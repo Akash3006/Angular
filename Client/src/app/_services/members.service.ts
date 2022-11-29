@@ -45,6 +45,10 @@ export class MembersService {
   setMainPhoto(photoId:number){
     return this.http.put(BaseUrl+UserController+'/set-main-photo/'+photoId,{});
   }
+
+  deletePhoto(publicId:string){
+    return this.http.delete(BaseUrl+UserController+'/delete-photo/'+publicId,{});
+  }
   // getHttpOptions(){
   //   var userString = localStorage.getItem('user');
   //   if(!userString) return;
