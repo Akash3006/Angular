@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
+import { Photo } from 'src/app/_models/photo';
 import { User } from 'src/app/_models/User';
 import { AccountService } from 'src/app/_services/account.service';
+import { MembersService } from 'src/app/_services/members.service';
 import {BaseUrl} from '../../constants/Constants'
 @Component({
   selector: 'app-photo-edit',
@@ -18,7 +20,7 @@ export class PhotoEditComponent implements OnInit {
   baseUrl = BaseUrl;
   user :User;
 
-  constructor(private accountService:AccountService) {
+  constructor(private accountService:AccountService,private memberService:MembersService) {
     this.accountService.current$.pipe(take(1)).subscribe({
       next: user=>{if(user) this.user = user}
     });
@@ -34,6 +36,32 @@ export class PhotoEditComponent implements OnInit {
     this.hasBaseDropZoneOver = e;
   }
 
+  setMainPhoto(photo:Photo){
+    this.memberService.setMainPhoto(photo.id).subscribe({
+      next: ()=>{
+        if(this.user && this.member)
+        {
+          //settting the main photo along with the nave photo
+          this.user.photoUrl = photo.url
+
+          //updating the user 
+          this.accountService.setCurrentUser(this.user);
+
+          //Changing the card and user detail photo 
+          this.member.photoUrl = photo.url
+
+          //Make the photo as main 
+          this.member.photos.forEach(
+            p=>{
+              if(p.isMain) p.isMain =false;
+              
+              if(p.id == photo.id) p.isMain =true;
+            }
+          )
+        }
+      }
+    });
+  }
   initializeUploader(){
     this.uploader = new FileUploader({
       url: this.baseUrl+'users/add-photo',

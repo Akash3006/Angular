@@ -41,6 +41,10 @@ export class MembersService {
       })
     );
   }
+
+  setMainPhoto(photoId:number){
+    return this.http.put(BaseUrl+UserController+'/set-main-photo/'+photoId,{});
+  }
   // getHttpOptions(){
   //   var userString = localStorage.getItem('user');
   //   if(!userString) return;

@@ -18,7 +18,8 @@
         </ul>
 
         <div class="dropdown" *ngIf="(accountservice.current$|async) as user" dropdown>
-          <a  class="dropdown-toggle text-dark" dropdownToggle>
+          <img src="{{user.photoUrl}}" alt="User Photo">
+          <a  class="dropdown-toggle text-dark ms-3" dropdownToggle>
             Welcome{{user.userame}}
           </a>
           <div class="dropdown-menu" *dropdownMenu>
