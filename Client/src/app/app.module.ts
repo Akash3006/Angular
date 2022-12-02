@@ -18,10 +18,13 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
+import {TimeagoModule} from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -45,11 +48,15 @@ import { FileUploadModule } from 'ng2-file-upload';
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    TimeagoModule.forRoot(),
     BrowserAnimationsModule,
     NgxGalleryModule,
+    ButtonsModule.forRoot(),
     NgxSpinnerModule.forRoot({
       type:'line-scale-party'}),
-      FileUploadModule
+      FileUploadModule,
+      PaginationModule.forRoot()
+      
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true},

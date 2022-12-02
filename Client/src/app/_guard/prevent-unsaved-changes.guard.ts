@@ -12,7 +12,7 @@ export class PreventUnsavedChangesGuard implements CanDeactivate<MemberEditCompo
     component: MemberEditComponent): boolean {
       if(component.editForm?.dirty)
       {
-
+        
       }
     return true;
   }
